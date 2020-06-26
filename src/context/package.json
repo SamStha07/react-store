@@ -1,0 +1,6 @@
+// because of this file we don't need to import files like ./context/context.js 
+// it will automatically export components from ocntext.js importing like this './context'
+
+{
+  "main": "context.js"
+}
