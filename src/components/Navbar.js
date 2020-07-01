@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { ProductConsumer } from "../context/context";
 import logo from "../images/logo.svg";
 
-
 const NavWrapper = styled.nav`
   position: sticky;
   position: --webkit-sticky;
@@ -13,7 +12,7 @@ const NavWrapper = styled.nav`
   padding: 1rem 1.5rem;
   background: var(--mainGrey);
   border-bottom: 3px solid var(--primaryColor);
-
+  z-index: 1;
   .nav-center {
     display: flex;
     align-items: center;
@@ -38,7 +37,7 @@ const NavWrapper = styled.nav`
     padding: 0 5px;
     border-radius: 50%;
   }
-  img{
+  img {
     cursor: pointer;
   }
 `;
@@ -67,5 +66,3 @@ export default class Navbar extends Component {
     );
   }
 }
-
-
