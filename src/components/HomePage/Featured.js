@@ -11,7 +11,7 @@ export default class Featured extends Component {
         <div className="container">
           {/* title */}
           <Title title="featured products" center="true" />
-          <div className="row">
+          <div className="row my-5">
             <ProductConsumer>
               {(value) => {
                 const { featuredProducts } = value;
