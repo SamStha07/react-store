@@ -59,14 +59,25 @@ class ProductProvider extends Component {
       }
     );
   };
-  //get cart from local storage
+  //get cart items from local storage
   getStorageCart = () => {
-    return [];
+    let cart;
+    if (localStorage.getItem("cart")) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    } else {
+      cart = [];
+    }
+    return cart;
   };
 
   //get product from local storage
   getStorageProduct = () => {
     return {};
+  };
+
+  //stores the carts items in local storage
+  syncStorage = () => {
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
   };
 
   //get Total
@@ -106,9 +117,6 @@ class ProductProvider extends Component {
   //     cartTotal: totals.total,
   //   });
   // };
-
-  //sync storage
-  syncStorage = () => {};
 
   //add to cart
   addToCart = (id) => {
