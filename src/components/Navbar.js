@@ -1,8 +1,36 @@
 import React, { Component } from "react";
 import { FaBars, FaCartPlus } from "react-icons/fa";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { ProductConsumer } from "../context/context";
 import logo from "../images/logo.svg";
+
+export default class Navbar extends Component {
+  render() {
+    return (
+      <ProductConsumer>
+        {(value) => {
+          const { cartItems, handleCart, handleSidebar } = value;
+          return (
+            <NavWrapper>
+              <div className="nav-center">
+                <FaBars className="nav-icon" onClick={handleSidebar} />
+                <Link to="/">
+                  <img src={logo} alt="store logo" />
+                </Link>
+
+                <div className="nav-cart">
+                  <FaCartPlus className="nav-icon" onClick={handleCart} />
+                  <div className="cart-items">{cartItems}</div>
+                </div>
+              </div>
+            </NavWrapper>
+          );
+        }}
+      </ProductConsumer>
+    );
+  }
+}
 
 const NavWrapper = styled.nav`
   position: sticky;
@@ -41,28 +69,3 @@ const NavWrapper = styled.nav`
     cursor: pointer;
   }
 `;
-
-export default class Navbar extends Component {
-  render() {
-    return (
-      <ProductConsumer>
-        {(value) => {
-          const { cartItems, handleCart, handleSidebar } = value;
-          return (
-            <NavWrapper>
-              <div className="nav-center">
-                <FaBars className="nav-icon" onClick={handleSidebar} />
-                <img src={logo} alt="store logo" />
-
-                <div className="nav-cart">
-                  <FaCartPlus className="nav-icon" onClick={handleCart} />
-                  <div className="cart-items">{cartItems}</div>
-                </div>
-              </div>
-            </NavWrapper>
-          );
-        }}
-      </ProductConsumer>
-    );
-  }
-}
