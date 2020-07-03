@@ -75,7 +75,31 @@ class ProductProvider extends Component {
 
   //add to cart
   addToCart = (id) => {
-    console.log(id);
+    let tempCart = [...this.state.cart]; //inside the cart
+    let tempProducts = [...this.state.storeProducts]; ///gives our all products
+    let tempItem = tempCart.find((item) => item.id === id); //find le single item dinxa
+    if (!tempItem) {
+      tempItem = tempProducts.find((item) => item.id === id);
+      let total = tempItem.price;
+      let cartItem = { ...tempItem, count: 1, total };
+      tempCart = [...tempCart, cartItem];
+    } else {
+      tempItem.count++;
+      tempItem.total = tempItem.price * tempItem.count;
+      tempItem.total = parseFloat(tempItem.total.toFixed(2));
+    }
+    this.setState(
+      () => {
+        return {
+          cart: tempCart,
+        };
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+        this.handleOpenCart();
+      }
+    );
   };
 
   //set single product
