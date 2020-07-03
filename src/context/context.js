@@ -23,8 +23,8 @@ class ProductProvider extends Component {
       storeProducts: [],
       filteredProducts: [],
       featuredProducts: [],
-      singleProducts: {},
-      loading: false,
+      singleProduct: {},
+      loading: true,
     };
   }
 
@@ -51,7 +51,7 @@ class ProductProvider extends Component {
         filteredProducts: storeProducts,
         featuredProducts,
         cart: this.getStorageCart(),
-        singleProducts: this.getStorageProduct(),
+        singleProduct: this.getStorageProduct(),
         loading: false,
       },
       () => {
@@ -72,7 +72,9 @@ class ProductProvider extends Component {
 
   //get product from local storage
   getStorageProduct = () => {
-    return {};
+    return localStorage.getItem("singleProduct")
+      ? JSON.parse(localStorage.getItem("singleProduct"))
+      : {};
   };
 
   //stores the carts items in local storage
@@ -149,7 +151,14 @@ class ProductProvider extends Component {
 
   //set single product
   setSingleProduct = (id) => {
-    console.log(id);
+    let product = this.state.storeProducts.find((item) => item.id === id);
+    localStorage.setItem("singleProduct", JSON.stringify(product));
+    this.setState({
+      singleProduct: {
+        ...product,
+        loading: false,
+      },
+    });
   };
 
   handleSidebar = () => {
