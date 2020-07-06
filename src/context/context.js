@@ -180,13 +180,50 @@ class ProductProvider extends Component {
   };
   decrement = (id) => {
     let tempCart = [...this.state.cart];
-    console.log(tempCart);
+    const cartItem = tempCart.find((item) => item.id === id);
+    cartItem.count = cartItem.count - 1;
+    if (cartItem.count === 0) {
+      this.remove(id);
+    } else {
+      cartItem.total = cartItem.count * cartItem.price;
+      cartItem.total = parseFloat(cartItem.total.toFixed(2));
+      this.setState(
+        () => {
+          return {
+            cart: [...tempCart],
+          };
+        },
+        () => {
+          this.getTotals();
+          this.syncStorage();
+        }
+      );
+    }
   };
+
   remove = (id) => {
-    console.log(id);
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter((item) => item.id !== id);
+    this.setState(
+      {
+        cart: [...tempCart],
+      },
+      () => {
+        this.getTotals();
+        this.syncStorage();
+      }
+    );
   };
   clearCart = () => {
-    console.log("you just clear the cart");
+    this.setState(
+      {
+        cart: [],
+      },
+      () => {
+        this.getTotals();
+        this.syncStorage();
+      }
+    );
   };
 
   render() {
