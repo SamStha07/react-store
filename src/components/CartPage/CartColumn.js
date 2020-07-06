@@ -1,9 +1,30 @@
-import React from 'react'
+import React from "react";
 
 export default function CartColumn() {
-    return (
-        <div>
-            cart columns
+  return (
+    <div className="container-fluid text-center d-none d-lg-block my-5">
+      <div className="row">
+        {/* single column */}
+        <div className="col-lg-2">
+          <p className="text-uppercase">products</p>
         </div>
-    )
+        {/* comlumn end */}
+        <div className="col-lg-2">
+          <p className="text-uppercase">name of product</p>
+        </div>
+        <div className="col-lg-2">
+          <p className="text-uppercase">price</p>
+        </div>
+        <div className="col-lg-2">
+          <p className="text-uppercase">quantity</p>
+        </div>
+        <div className="col-lg-2">
+          <p className="text-uppercase">remove</p>
+        </div>
+        <div className="col-lg-2">
+          <p className="text-uppercase">total</p>
+        </div>
+      </div>
+    </div>
+  );
 }
