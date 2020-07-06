@@ -95,12 +95,7 @@ class ProductProvider extends Component {
     tax = parseFloat(tax.toFixed(2));
     let total = subTotal + tax;
     total = parseFloat(total.toFixed(2));
-    // return {
-    //   cartItems,
-    //   subTotal,
-    //   tax,
-    //   total,
-    // };
+
     this.setState({
       cartItems: cartItems,
       cartSubTotal: subTotal,
@@ -108,17 +103,6 @@ class ProductProvider extends Component {
       cartTotal: total,
     });
   };
-
-  // add total
-  // addTotals = () => {
-  //   const totals = this.getTotals();
-  //   this.setState({
-  //     cartItems: totals.cartItems,
-  //     cartSubTotal: totals.subTotal,
-  //     cartTax: totals.tax,
-  //     cartTotal: totals.total,
-  //   });
-  // };
 
   //add to cart
   addToCart = (id) => {
@@ -177,10 +161,26 @@ class ProductProvider extends Component {
 
   //cart page functionality
   increment = (id) => {
-    console.log(id);
+    let tempCart = [...this.state.cart];
+    const cartItem = tempCart.find((item) => item.id === id);
+    cartItem.count++;
+    cartItem.total = cartItem.count * cartItem.price;
+    cartItem.total = parseFloat(cartItem.total.toFixed(2));
+    this.setState(
+      () => {
+        return {
+          cart: [...tempCart],
+        };
+      },
+      () => {
+        this.getTotals();
+        this.syncStorage();
+      }
+    );
   };
   decrement = (id) => {
-    console.log(id);
+    let tempCart = [...this.state.cart];
+    console.log(tempCart);
   };
   remove = (id) => {
     console.log(id);
