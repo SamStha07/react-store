@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { linkData } from "./linkData";
 import { socialData } from "./socialData";
 import { items } from "./productData";
+import { ThemeProvider } from "styled-components";
 
 const ProductContext = React.createContext();
 //Provider
@@ -252,7 +253,36 @@ class ProductProvider extends Component {
     );
   };
   sortData = () => {
-    console.log("sorting data");
+    const { storeProducts, price, company, shipping, search } = this.state;
+    let tempPrice = parseInt(price);
+    let tempProducts = [...storeProducts]; //storeProducts will be our original data where all data is stored
+    //filtering based on price
+    tempProducts = tempProducts.filter((item) => item.price <= tempPrice);
+
+    //filtering based on shipping
+    if (shipping) {
+      tempProducts = tempProducts.filter((item) => item.freeShipping === true);
+    }
+
+    //filtering based on search
+    if (search.length > 0) {
+      tempProducts = tempProducts.filter((item) => {
+        let tempSearch = search.toLowerCase();
+        let tempTitle = item.title.toLowerCase().slice(0, search.length);
+        if (tempSearch === tempTitle) {
+          return item;
+        }
+      });
+    }
+
+    //filtering based on company
+    if (company !== "all") {
+      tempProducts = tempProducts.filter((item) => item.company === company);
+    }
+
+    this.setState({
+      filteredProducts: tempProducts, //filteredProducts is the which changes according to the price, company etc.
+    });
   };
 
   render() {
