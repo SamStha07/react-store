@@ -240,10 +240,8 @@ class ProductProvider extends Component {
   //handle filtering
   handleChange = (event) => {
     console.log(event);
-  }
-  sortData =()=>{
-
-  }
+  };
+  sortData = () => {};
 
   render() {
     return (
