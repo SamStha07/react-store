@@ -31,7 +31,7 @@ export default function FilterProducts() {
               <FilterWrapper>
                 {/* text search */}
                 <div>
-                  <label htmlFor={search}>search products</label>
+                  <label htmlFor="search">search products</label>
                   <input
                     type="text"
                     name="search"
@@ -43,7 +43,7 @@ export default function FilterProducts() {
                   {/* end of search */}
                   {/* category search */}
                   <div>
-                    <label htmlFor={company}>company</label>
+                    <label htmlFor="company">company</label>
                     <select
                       name="company"
                       id="company"
@@ -61,7 +61,7 @@ export default function FilterProducts() {
                   {/* end of category */}
                   {/* price range */}
                   <div>
-                    <label htmlFor={price}>
+                    <label htmlFor="price">
                       <p className="mb-2">
                         product price: <span>Rs.{price}</span>
                       </p>
@@ -80,7 +80,7 @@ export default function FilterProducts() {
                   {/* end of price */}
                   {/* free shipping */}
                   <div>
-                    <label htmlFor={shipping} className="mx-2">
+                    <label htmlFor="shipping" className="mx-2">
                       free shipping
                     </label>
                     <input
